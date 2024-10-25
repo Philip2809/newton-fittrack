@@ -7,13 +7,14 @@ using System.Windows.Input;
 
 namespace FitTrack.MVVM
 {
-    class RelayCommand : ICommand
-    {
+    // Generic implementation of ICommand to easily create commands for buttons
 
-        private Action<object> execute;
+    class RelayCommand<Type> : ICommand
+    {
+        private Action<Type> execute;
         private Func<object, bool>? canExecute;
 
-        public RelayCommand(Action<object> execute, Func<object, bool>? canExecute = null)
+        public RelayCommand(Action<Type> execute, Func<object, bool>? canExecute = null)
         {
             this.execute = execute;
             this.canExecute = canExecute;
@@ -32,7 +33,7 @@ namespace FitTrack.MVVM
 
         public void Execute(object parameter)
         {
-            execute(parameter);
+            execute((Type)parameter);
         }
     }
 }

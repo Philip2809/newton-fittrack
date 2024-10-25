@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace FitTrack.MVVM
 {
+    // Base for ViewModels to implement INotifyPropertyChanged, to allow for automatic updates
     class ViewModelBase : INotifyPropertyChanged
     {
 

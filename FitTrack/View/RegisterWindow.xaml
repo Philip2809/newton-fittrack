@@ -1,0 +1,51 @@
+﻿<Window x:Class="FitTrack.View.RegisterWindow"
+        x:Name="FitTrackRegisterWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        Title="RegisterWindow" Height="450" Width="800">
+    <Grid>
+        <Grid.Background>
+            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                <GradientStop Color="Black"/>
+                <GradientStop Color="Crimson" Offset="1"/>
+                <GradientStop Color="#FF64ED0A"/>
+                <GradientStop Color="#FFD77D8F"/>
+                <GradientStop Color="#FFD77D8F"/>
+            </LinearGradientBrush>
+        </Grid.Background>
+
+        
+        <Label Content="FitTrack" HorizontalAlignment="Center" Margin="0,20,0,0" VerticalAlignment="Top" FontFamily="Arial" FontSize="50" Foreground="LightGray"/>
+        
+        <Label Content="Username" HorizontalAlignment="Center" Margin="0,111,0,0" VerticalAlignment="Top" FontWeight="Bold" Padding="0,0,0,0" Foreground="LightGray" FontFamily="Arial"/>
+        <TextBox Text="{Binding UsernameInput, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Center" Margin="0,126,0,0" VerticalAlignment="Top" Width="200" Background="{x:Null}" FontFamily="Arial" FontSize="25" BorderBrush="LightGray"/>
+        
+        <Label Content="Password" HorizontalAlignment="Center" Margin="0,161,0,0" VerticalAlignment="Top" FontWeight="Bold" Padding="0,0,0,0" Foreground="LightGray" FontFamily="Arial"/>
+        <PasswordBox Name="pbxPassword" HorizontalAlignment="Center" Margin="0,175,0,0" VerticalAlignment="Top" Width="200" Background="{x:Null}" FontFamily="Arial" FontSize="25" BorderBrush="LightGray"/>
+        
+        <Label Content="Confirm password" HorizontalAlignment="Center" Margin="0,211,0,0" VerticalAlignment="Top" FontWeight="Bold" Padding="0,0,0,0" Foreground="LightGray" FontFamily="Arial"/>
+        <PasswordBox Name="pbxPasswordConfirm" HorizontalAlignment="Center" Margin="0,225,0,0" VerticalAlignment="Top" Width="200" Background="{x:Null}" FontFamily="Arial" FontSize="25" BorderBrush="LightGray"/>
+
+        <Label Content="Country" HorizontalAlignment="Center" Margin="0,261,0,0" VerticalAlignment="Top" FontWeight="Bold" Padding="0,0,0,0" Foreground="LightGray" FontFamily="Arial"/>
+        <ComboBox Text="Select country" ItemsSource="{Binding Countries}" SelectedItem="{Binding CountryInput, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Center" Margin="0,275,0,0" VerticalAlignment="Top" Width="200" FontFamily="Arial" FontSize="25" Background="{x:Null}"/>
+
+        <Button Command="{Binding LoginCommand}" CommandParameter="{Binding ElementName=FitTrackRegisterWindow}" Content="Already have an account? Log in!" HorizontalAlignment="Center" Margin="0,330,0,0" VerticalAlignment="Top" FontFamily="Arial" FontSize="12" Width="200" Background="{x:Null}" BorderBrush="{x:Null}" Template="{StaticResource NoMouseOverButtonTemplate}" Foreground="LightGray"/>
+
+        <Button Command="{Binding RegisterCommand}" Content="Register" HorizontalAlignment="Center" Margin="0,350,0,0" VerticalAlignment="Top" FontFamily="Arial" FontSize="30" Width="150" Background="Crimson" Foreground="LightGray" BorderBrush="LightGray">
+            <Button.CommandParameter>
+                <MultiBinding Converter="{StaticResource PasswordBoxConverter}">
+                    <Binding ElementName="pbxPassword"/>
+                    <Binding ElementName="pbxPasswordConfirm"/>
+                </MultiBinding>
+            </Button.CommandParameter>
+            <Button.Resources>
+                <Style TargetType="{x:Type Border}">
+                    <Setter Property="CornerRadius" Value="7"/>
+                </Style>
+            </Button.Resources>
+        </Button>
+    </Grid>
+</Window>

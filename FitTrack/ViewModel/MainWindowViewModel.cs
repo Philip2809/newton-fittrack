@@ -1,4 +1,5 @@
 ﻿using FitTrack.MVVM;
+using FitTrack.View;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,7 +13,8 @@ namespace FitTrack.ViewModel
     class MainWindowViewModel : ViewModelBase
     {
 
-        public RelayCommand SignInCommand => new RelayCommand(parameter => SignIn(parameter), canExecute => usernameInput != "");
+        public RelayCommand<PasswordBox> SignInCommand => new RelayCommand<PasswordBox>(pbxPassword => SignIn(pbxPassword), canExecute => usernameInput != "");
+        public RelayCommand<Window> RegisterCommand => new RelayCommand<Window>(mainWindow => Register(mainWindow));
 
         private string usernameInput = "";
         public string UsernameInput
@@ -25,16 +27,16 @@ namespace FitTrack.ViewModel
             }
         }
 
-        public void SignIn(object parameter)
+        public void SignIn(PasswordBox? pbxPassword)
         {
-            var pbxPassword = parameter as PasswordBox;
             // temporarly show a window with inputed username and password
             MessageBox.Show("Username: " + UsernameInput + "\nPassword: " + pbxPassword?.Password);
         }
 
-        public void Register()
+        public void Register(Window? mainWindow)
         {
-            
+            new RegisterWindow().Show();
+            mainWindow?.Close();
         }
 
     }
