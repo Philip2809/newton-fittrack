@@ -1,4 +1,4 @@
-﻿using FitTrack.MVVM;
+﻿using FitTrack.Model;
 using FitTrack.ViewModel;
 using System;
 using System.Collections.Generic;
@@ -16,16 +16,12 @@ using System.Windows.Shapes;
 
 namespace FitTrack.View
 {
-    public partial class RegisterWindow : Window
+    public partial class WorkoutsWindow : Window
     {
-        public RegisterWindow()
+        public WorkoutsWindow(User user)
         {
-            // Add MultiBinderConverter resource before InitializeComponent so it can be used in XAML
-            this.Resources.Add("MultiBinderConverter", new MultiBinderConverter());
-
             InitializeComponent();
-            DataContext = new RegisterWindowViewModel();
+            DataContext = new WorkoutsWindowViewModel(user);
         }
     }
-
 }

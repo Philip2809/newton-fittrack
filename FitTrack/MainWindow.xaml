@@ -29,7 +29,13 @@
 
         <Button Command="{Binding RegisterCommand}" CommandParameter="{Binding ElementName=FitTrackMainWindow}" Content="New here? Register an account!" HorizontalAlignment="Center" Margin="0,230,0,0" VerticalAlignment="Top" FontFamily="Arial" FontSize="12" Width="200" Background="{x:Null}" BorderBrush="{x:Null}" Template="{StaticResource NoMouseOverButtonTemplate}" Foreground="LightGray"/>
 
-        <Button Command="{Binding SignInCommand}" CommandParameter="{Binding ElementName=pbxPassword}" Content="Sign in" HorizontalAlignment="Center" Margin="0,254,0,0" VerticalAlignment="Top" FontFamily="Arial" FontSize="30" Width="150" Background="Crimson" Foreground="LightGray" BorderBrush="LightGray">
+        <Button Command="{Binding SignInCommand}" Content="Sign in" HorizontalAlignment="Center" Margin="0,254,0,0" VerticalAlignment="Top" FontFamily="Arial" FontSize="30" Width="150" Background="Crimson" Foreground="LightGray" BorderBrush="LightGray">
+            <Button.CommandParameter>
+                <MultiBinding Converter="{StaticResource MultiBinderConverter}">
+                    <Binding ElementName="pbxPassword"/>
+                    <Binding ElementName="FitTrackMainWindow"/>
+                </MultiBinding>
+            </Button.CommandParameter>
             <Button.Resources>
                 <Style TargetType="{x:Type Border}">
                     <Setter Property="CornerRadius" Value="7"/>

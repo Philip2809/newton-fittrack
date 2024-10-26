@@ -1,4 +1,7 @@
-﻿using FitTrack.ViewModel;
+﻿using FitTrack.Model;
+using FitTrack.MVVM;
+using FitTrack.Utils;
+using FitTrack.ViewModel;
 using System.Windows;
 namespace FitTrack
 {
@@ -6,6 +9,9 @@ namespace FitTrack
     {
         public MainWindow()
         {
+            // Add MultiBinderConverter resource before InitializeComponent so it can be used in XAML
+            this.Resources.Add("MultiBinderConverter", new MultiBinderConverter());
+
             InitializeComponent();
             DataContext = new MainWindowViewModel();
         }

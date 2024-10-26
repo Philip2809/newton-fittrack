@@ -36,9 +36,10 @@
 
         <Button Command="{Binding RegisterCommand}" Content="Register" HorizontalAlignment="Center" Margin="0,350,0,0" VerticalAlignment="Top" FontFamily="Arial" FontSize="30" Width="150" Background="Crimson" Foreground="LightGray" BorderBrush="LightGray">
             <Button.CommandParameter>
-                <MultiBinding Converter="{StaticResource PasswordBoxConverter}">
+                <MultiBinding Converter="{StaticResource MultiBinderConverter}">
                     <Binding ElementName="pbxPassword"/>
                     <Binding ElementName="pbxPasswordConfirm"/>
+                    <Binding ElementName="FitTrackRegisterWindow"/>
                 </MultiBinding>
             </Button.CommandParameter>
             <Button.Resources>

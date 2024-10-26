@@ -1,4 +1,5 @@
 ﻿using FitTrack.MVVM;
+using FitTrack.Utils;
 using FitTrack.View;
 using System;
 using System.Collections.Generic;
@@ -13,7 +14,7 @@ namespace FitTrack.ViewModel
     class MainWindowViewModel : ViewModelBase
     {
 
-        public RelayCommand<PasswordBox> SignInCommand => new RelayCommand<PasswordBox>(pbxPassword => SignIn(pbxPassword), canExecute => usernameInput != "");
+        public RelayCommand<object[]> SignInCommand => new RelayCommand<object[]>(parameters => SignIn(parameters), canExecute => usernameInput != "");
         public RelayCommand<Window> RegisterCommand => new RelayCommand<Window>(mainWindow => Register(mainWindow));
 
         private string usernameInput = "";
@@ -27,10 +28,22 @@ namespace FitTrack.ViewModel
             }
         }
 
-        public void SignIn(PasswordBox? pbxPassword)
+        public void SignIn(object[] parameters)
         {
+            MessageBox.Show(parameters?.GetType().Name);
+            var pbxPassword = parameters[0] as PasswordBox;
+            var mainWindow = parameters[1] as Window;
             // temporarly show a window with inputed username and password
-            MessageBox.Show("Username: " + UsernameInput + "\nPassword: " + pbxPassword?.Password);
+            var user = UserManager.AuthenticateUser(UsernameInput, pbxPassword?.Password);
+            if (user != null)
+            {
+                user.SignIn();
+                mainWindow?.Close();
+            }
+            else
+            {
+                Helpers.Error("Invalid username or password");
+            }
         }
 
         public void Register(Window? mainWindow)
