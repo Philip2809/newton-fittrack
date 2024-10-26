@@ -1,6 +1,7 @@
 ﻿using FitTrack.Model;
 using FitTrack.MVVM;
 using FitTrack.Utils;
+using FitTrack.View;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -14,11 +15,19 @@ using System.Windows.Controls;
 
 namespace FitTrack.ViewModel
 {
-    class RegisterWindowViewModel : ViewModelBase
+    class UserDetailsWindowViewModel : ViewModelBase
     {
         public List<string> Countries { get { return Helpers.Countries; } } 
-        public RelayCommand<Window> LoginCommand => new RelayCommand<Window>(registerWindow => GoBackToLogin(registerWindow));
-        public RelayCommand<object[]> RegisterCommand => new RelayCommand<object[]> (parameters => Register(parameters), canExecute => countryInput != "" && usernameInput != "");
+        public RelayCommand<Window> CancelCommand => new RelayCommand<Window>(window => Cancel(window));
+        public RelayCommand<object[]> SaveCommand => new RelayCommand<object[]> (parameters => Save(parameters));
+
+        public User User { get; set; }
+        public UserDetailsWindowViewModel(User user)
+        {
+            User = user;
+            UsernameInput = user.Username;
+            CountryInput = user.Country;
+        }
 
         private string usernameInput = "";
         public string UsernameInput
@@ -42,36 +51,33 @@ namespace FitTrack.ViewModel
             }
         }
 
-        private void GoBackToLogin(Window window)
+        private void Cancel(Window window)
         {
-            new MainWindow().Show();
+            new WorkoutsWindow(User).Show();
             window.Close();
         }
 
-        private void Register(object[] parameters)
+        private void Save(object[] parameters)
         {
             var password = (parameters[0] as PasswordBox)?.Password;
             var passwordConfirm = (parameters[1] as PasswordBox)?.Password;
             var window = parameters[2] as Window;
-
+            
             if (!Helpers.IsPasswordGood(password, passwordConfirm))
             {
                 return;
             }
 
-            User user = new()
+            if (usernameInput.Length < 3)
             {
-                Username = usernameInput,
-                Country = countryInput,
-                Password = password,
-                SecurityQuestion = "",
-                SecurityAnswer = ""
-            };
+                Helpers.Error("Username must be at least 3 characters long");
+                return;
+            }
 
-            var success = UserManager.AddUser(user);
-            if (success)
+            var updatedUser = UserManager.UpdateUser(User, usernameInput, countryInput, password);
+            if (updatedUser != null)
             {
-                new MainWindow().Show();
+                new WorkoutsWindow(updatedUser).Show();
                 window?.Close();
             } else
             {

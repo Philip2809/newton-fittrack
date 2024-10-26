@@ -17,6 +17,7 @@ namespace FitTrack.Utils
             var existingUser = users.Find(u => u.Username == user.Username);
             if (existingUser == null)
             {
+                user.Id = users.Count;
                 users.Add(user);
                 return true;
             }
@@ -24,6 +25,22 @@ namespace FitTrack.Utils
             {
                 return false;
             }
+        }
+
+        public static User? UpdateUser(User user, string newUsername, string newCountry, string newPassword)
+        {
+            // If user wants a new username check that its not used
+            if (user.Username != newUsername) {
+                // if used return false
+                if (users.Find(u => u.Username ==  newUsername) != null) return null;
+            }
+
+            // If all good then update the existing user
+            var existingUser = users.Find(u => u.Username == user.Username);
+            existingUser.Username = newUsername;
+            existingUser.Country = newCountry;
+            existingUser.Password = newPassword;
+            return existingUser;
         }
 
         public static User? AuthenticateUser(string username, string password)

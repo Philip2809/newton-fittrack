@@ -10,6 +10,11 @@ namespace FitTrack.Model
 {
     public class User : Person
     {
+        // So that a workout manager can easily access the user's workouts
+        public int Id { get; set; }
+
+        // IsAdmin is set here to UserManager and WorkoutManager can use it easily
+        public bool IsAdmin { get; set; } = false;
         public string Country { get; set; }
         public string SecurityQuestion { get; set; }
         public string SecurityAnswer { get; set; }
