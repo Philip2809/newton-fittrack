@@ -10,6 +10,8 @@ namespace FitTrack.Model
     {
         // UserId to allow workout manager to filter by user
         public int UserId { get; set; }
+        // To easily allow delete and updates
+        public int Id { get; set; }
         public DateTime Date { get; set; }
         public string Type { get; set; }
         public TimeSpan Duration { get; set; }

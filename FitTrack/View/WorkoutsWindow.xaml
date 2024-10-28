@@ -4,12 +4,11 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:FitTrack.View"
         mc:Ignorable="d"
         Title="WorkoutsWindow" Height="450" Width="800">
     <Grid Background="Crimson">
 
-        <DataGrid ItemsSource="{Binding Workouts}" Margin="0,0,300,0" AutoGenerateColumns="False" IsReadOnly="True">
+        <DataGrid ItemsSource="{Binding Workouts}" SelectedItem="{Binding SelectedWorkout, UpdateSourceTrigger=PropertyChanged}" Margin="0,0,300,0" AutoGenerateColumns="False" IsReadOnly="True">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Type" Binding="{Binding Type}" />
                 <DataGridTextColumn Header="Date" Binding="{Binding Date, StringFormat='{}{0:MM/dd/yyyy}'}" />
@@ -21,7 +20,7 @@
         <Label Content="{Binding User.Username}" HorizontalAlignment="Left" Margin="649,57,0,0" VerticalAlignment="Top" FontFamily="Arial" FontSize="15" Foreground="LightGray"/>
 
 
-        <Button Command="{Binding SignInCommand}" Content="Add workout" HorizontalAlignment="Left" Margin="554,91,0,0" VerticalAlignment="Top" FontFamily="Arial" FontSize="30" Width="200" Background="Crimson" Foreground="LightGray" BorderBrush="LightGray">
+        <Button Command="{Binding AddWorkoutCommand}" Content="Add workout" HorizontalAlignment="Left" Margin="554,91,0,0" VerticalAlignment="Top" FontFamily="Arial" FontSize="30" Width="200" Background="Crimson" Foreground="LightGray" BorderBrush="LightGray">
             <Button.Resources>
                 <Style TargetType="{x:Type Border}">
                     <Setter Property="CornerRadius" Value="7"/>
@@ -35,7 +34,7 @@
                 </Style>
             </Button.Resources>
         </Button>
-        <Button Command="{Binding SignInCommand}" Content="Remove" HorizontalAlignment="Left" Margin="554,197,0,0" VerticalAlignment="Top" FontFamily="Arial" FontSize="30" Width="200" Background="Crimson" Foreground="LightGray" BorderBrush="LightGray">
+        <Button Command="{Binding RemoveCommand}" Content="Remove" HorizontalAlignment="Left" Margin="554,197,0,0" VerticalAlignment="Top" FontFamily="Arial" FontSize="30" Width="200" Background="Crimson" Foreground="LightGray" BorderBrush="LightGray">
             <Button.Resources>
                 <Style TargetType="{x:Type Border}">
                     <Setter Property="CornerRadius" Value="7"/>

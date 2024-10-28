@@ -17,9 +17,9 @@ namespace FitTrack.ViewModel
 {
     class UserDetailsWindowViewModel : ViewModelBase
     {
-        public List<string> Countries { get { return Helpers.Countries; } } 
+        public List<string> Countries { get { return Helpers.Countries; } }
         public RelayCommand<Window> CancelCommand => new RelayCommand<Window>(window => Cancel(window));
-        public RelayCommand<object[]> SaveCommand => new RelayCommand<object[]> (parameters => Save(parameters));
+        public RelayCommand<object[]> SaveCommand => new RelayCommand<object[]>(parameters => Save(parameters));
 
         public User User { get; set; }
         public UserDetailsWindowViewModel(User user)
@@ -62,7 +62,7 @@ namespace FitTrack.ViewModel
             var password = (parameters[0] as PasswordBox)?.Password;
             var passwordConfirm = (parameters[1] as PasswordBox)?.Password;
             var window = parameters[2] as Window;
-            
+
             if (!Helpers.IsPasswordGood(password, passwordConfirm))
             {
                 return;
@@ -79,7 +79,8 @@ namespace FitTrack.ViewModel
             {
                 new WorkoutsWindow(updatedUser).Show();
                 window?.Close();
-            } else
+            }
+            else
             {
                 Helpers.Error("User already exists!");
             }
