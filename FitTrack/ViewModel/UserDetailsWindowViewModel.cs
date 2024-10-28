@@ -27,6 +27,7 @@ namespace FitTrack.ViewModel
             User = user;
             UsernameInput = user.Username;
             CountryInput = user.Country;
+            TwoFAInput = user.TwoFA;
         }
 
         private string usernameInput = "";
@@ -36,6 +37,17 @@ namespace FitTrack.ViewModel
             set
             {
                 usernameInput = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private bool twoFAInput = false;
+        public bool TwoFAInput
+        {
+            get { return twoFAInput; }
+            set
+            {
+                twoFAInput = value;
                 OnPropertyChanged();
             }
         }
@@ -74,7 +86,7 @@ namespace FitTrack.ViewModel
                 return;
             }
 
-            var updatedUser = UserManager.UpdateUser(User, usernameInput, countryInput, password);
+            var updatedUser = UserManager.UpdateUser(User, usernameInput, countryInput, password, twoFAInput);
             if (updatedUser != null)
             {
                 new WorkoutsWindow(updatedUser).Show();

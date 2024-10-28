@@ -25,7 +25,7 @@
         <Label Content="Password" HorizontalAlignment="Center" Margin="0,161,0,0" VerticalAlignment="Top" FontWeight="Bold" Padding="0,0,0,0" Foreground="LightGray" FontFamily="Arial"/>
         <PasswordBox Name="pbxPassword" HorizontalAlignment="Center" Margin="0,175,0,0" VerticalAlignment="Top" Width="200" Background="{x:Null}" FontFamily="Arial" FontSize="25" BorderBrush="LightGray"/>
 
-        <Label Content="Forgot your password?" HorizontalAlignment="Center" Margin="0,211,0,0" VerticalAlignment="Top" Padding="0,0,0,0" Foreground="LightGray" FontFamily="Arial"/>
+        <Button Command="{Binding ResetPasswordCommand}" CommandParameter="{Binding ElementName=FitTrackMainWindow}" Content="Forgot your password?" HorizontalAlignment="Center" Margin="0,211,0,0" VerticalAlignment="Top" Padding="0,0,0,0" Foreground="LightGray" FontFamily="Arial" Width="200" Background="{x:Null}" BorderBrush="{x:Null}" Template="{StaticResource NoMouseOverButtonTemplate}"/>
 
         <Button Command="{Binding RegisterCommand}" CommandParameter="{Binding ElementName=FitTrackMainWindow}" Content="New here? Register an account!" HorizontalAlignment="Center" Margin="0,230,0,0" VerticalAlignment="Top" FontFamily="Arial" FontSize="12" Width="200" Background="{x:Null}" BorderBrush="{x:Null}" Template="{StaticResource NoMouseOverButtonTemplate}" Foreground="LightGray"/>
 

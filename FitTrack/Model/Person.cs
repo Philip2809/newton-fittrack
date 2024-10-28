@@ -12,5 +12,6 @@ namespace FitTrack.Model
         public string Password { get; set; }
 
         abstract public void SignIn();
+        abstract public bool ResetPasword();
     }
 }

@@ -18,7 +18,7 @@ namespace FitTrack.ViewModel
     {
         public List<string> Countries { get { return Helpers.Countries; } } 
         public RelayCommand<Window> LoginCommand => new RelayCommand<Window>(registerWindow => GoBackToLogin(registerWindow));
-        public RelayCommand<object[]> RegisterCommand => new RelayCommand<object[]> (parameters => Register(parameters), canExecute => countryInput != "" && usernameInput != "");
+        public RelayCommand<object[]> RegisterCommand => new RelayCommand<object[]> (parameters => Register(parameters), canExecute => countryInput != "" && usernameInput != "" && securityQuestionInput != "");
 
         private string usernameInput = "";
         public string UsernameInput
@@ -38,6 +38,28 @@ namespace FitTrack.ViewModel
             set
             {
                 countryInput = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private string securityQuestionInput = "";
+        public string SecurityQuestionInput
+        {
+            get { return securityQuestionInput; }
+            set
+            {
+                securityQuestionInput = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private string securityAnswerInput = "";
+        public string SecurityAnswerInput
+        {
+            get { return securityAnswerInput; }
+            set
+            {
+                securityAnswerInput = value;
                 OnPropertyChanged();
             }
         }
@@ -64,8 +86,8 @@ namespace FitTrack.ViewModel
                 Username = usernameInput,
                 Country = countryInput,
                 Password = password,
-                SecurityQuestion = "",
-                SecurityAnswer = ""
+                SecurityQuestion = securityQuestionInput,
+                SecurityAnswer = securityAnswerInput
             };
 
             var success = UserManager.AddUser(user);

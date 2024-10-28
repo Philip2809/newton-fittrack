@@ -25,6 +25,7 @@ namespace FitTrack
                 Username = "user",
                 Country = "Sweden",
                 Password = "password",
+                TwoFA = true,
                 SecurityQuestion = "Vad är en banan?",
                 SecurityAnswer = "ett bär"
             };

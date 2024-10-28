@@ -16,6 +16,7 @@ namespace FitTrack.ViewModel
 
         public RelayCommand<object[]> SignInCommand => new RelayCommand<object[]>(parameters => SignIn(parameters), canExecute => usernameInput != "");
         public RelayCommand<Window> RegisterCommand => new RelayCommand<Window>(mainWindow => Register(mainWindow));
+        public RelayCommand<Window> ResetPasswordCommand => new RelayCommand<Window>(mainWindow => ResetPassword(mainWindow));
 
         private string usernameInput = "";
         public string UsernameInput
@@ -49,6 +50,12 @@ namespace FitTrack.ViewModel
         public void Register(Window? mainWindow)
         {
             new RegisterWindow().Show();
+            mainWindow?.Close();
+        }
+
+        public void ResetPassword(Window? mainWindow)
+        {
+            new ResetPasswordWindow().Show();
             mainWindow?.Close();
         }
 

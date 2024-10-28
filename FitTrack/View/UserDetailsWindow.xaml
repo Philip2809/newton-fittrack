@@ -9,14 +9,16 @@
     <Grid Background="Crimson">
         <Label Content="FitTrack" HorizontalAlignment="Center" Margin="0,20,0,0" VerticalAlignment="Top" FontFamily="Arial" FontSize="50" Foreground="LightGray"/>
 
-        <Label Content="Username" HorizontalAlignment="Center" Margin="0,111,0,0" VerticalAlignment="Top" FontWeight="Bold" Padding="0,0,0,0" Foreground="LightGray" FontFamily="Arial"/>
-        <TextBox Text="{Binding UsernameInput, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Center" Margin="0,126,0,0" VerticalAlignment="Top" Width="200" Background="{x:Null}" FontFamily="Arial" FontSize="25" BorderBrush="LightGray"/>
+        <Label Content="Username" HorizontalAlignment="Center" Margin="0,80,0,0" VerticalAlignment="Top" FontWeight="Bold" Padding="0,0,0,0" Foreground="LightGray" FontFamily="Arial"/>
+        <TextBox Text="{Binding UsernameInput, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Center" Margin="0,95,0,0" VerticalAlignment="Top" Width="200" Background="{x:Null}" FontFamily="Arial" FontSize="25" BorderBrush="LightGray"/>
 
-        <Label Content="New Password" HorizontalAlignment="Center" Margin="0,161,0,0" VerticalAlignment="Top" FontWeight="Bold" Padding="0,0,0,0" Foreground="LightGray" FontFamily="Arial"/>
-        <PasswordBox Name="pbxPassword" HorizontalAlignment="Center" Margin="0,175,0,0" VerticalAlignment="Top" Width="200" Background="{x:Null}" FontFamily="Arial" FontSize="25" BorderBrush="LightGray"/>
+        <Label Content="New Password" HorizontalAlignment="Center" Margin="0,130,0,0" VerticalAlignment="Top" FontWeight="Bold" Padding="0,0,0,0" Foreground="LightGray" FontFamily="Arial"/>
+        <PasswordBox Name="pbxPassword" HorizontalAlignment="Center" Margin="0,144,0,0" VerticalAlignment="Top" Width="200" Background="{x:Null}" FontFamily="Arial" FontSize="25" BorderBrush="LightGray"/>
 
-        <Label Content="Confirm password" HorizontalAlignment="Center" Margin="0,211,0,0" VerticalAlignment="Top" FontWeight="Bold" Padding="0,0,0,0" Foreground="LightGray" FontFamily="Arial"/>
-        <PasswordBox Name="pbxPasswordConfirm" HorizontalAlignment="Center" Margin="0,225,0,0" VerticalAlignment="Top" Width="200" Background="{x:Null}" FontFamily="Arial" FontSize="25" BorderBrush="LightGray"/>
+        <Label Content="Confirm password" HorizontalAlignment="Center" Margin="0,180,0,0" VerticalAlignment="Top" FontWeight="Bold" Padding="0,0,0,0" Foreground="LightGray" FontFamily="Arial"/>
+        <PasswordBox Name="pbxPasswordConfirm" HorizontalAlignment="Center" Margin="0,194,0,0" VerticalAlignment="Top" Width="200" Background="{x:Null}" FontFamily="Arial" FontSize="25" BorderBrush="LightGray"/>
+
+        <CheckBox IsChecked="{Binding TwoFAInput, UpdateSourceTrigger=PropertyChanged}" Content="2FA" HorizontalAlignment="Center" Margin="0,230,0,0" VerticalAlignment="Top"/>
 
         <Label Content="Country" HorizontalAlignment="Center" Margin="0,261,0,0" VerticalAlignment="Top" FontWeight="Bold" Padding="0,0,0,0" Foreground="LightGray" FontFamily="Arial"/>
         <ComboBox Text="Select country" ItemsSource="{Binding Countries}" SelectedItem="{Binding CountryInput, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Center" Margin="0,275,0,0" VerticalAlignment="Top" Width="200" FontFamily="Arial" FontSize="25" Background="{x:Null}"/>

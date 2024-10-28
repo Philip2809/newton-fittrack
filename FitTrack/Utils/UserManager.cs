@@ -27,7 +27,7 @@ namespace FitTrack.Utils
             }
         }
 
-        public static User? UpdateUser(User user, string newUsername, string newCountry, string newPassword)
+        public static User? UpdateUser(User user, string newUsername, string newCountry, string newPassword, bool twoFAInput)
         {
             // If user wants a new username check that its not used
             if (user.Username != newUsername) {
@@ -41,6 +41,7 @@ namespace FitTrack.Utils
             existingUser.Username = newUsername;
             existingUser.Country = newCountry;
             existingUser.Password = newPassword;
+            existingUser.TwoFA = twoFAInput;
             return existingUser;
         }
 
@@ -48,6 +49,5 @@ namespace FitTrack.Utils
         {
             return users.Find(u => u.Username == username && u.Password == password);
         }
-
     }
 }
