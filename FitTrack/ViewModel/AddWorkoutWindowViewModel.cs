@@ -23,6 +23,12 @@ namespace FitTrack.ViewModel
         public AddWorkoutWindowViewModel(User user, Workout? template)
         {
             User = user;
+
+            TypeInput = template?.Type ?? "";
+            DateInput = template?.Date ?? DateTime.Now;
+            DurationInput = template?.Duration.ToString(@"hh\:mm\:ss") ?? "";
+            CaloriesInput = template?.CaloriesBurned.ToString() ?? "";
+            NotesInput = template?.Notes ?? "";
         }
 
         private string typeInput = "";

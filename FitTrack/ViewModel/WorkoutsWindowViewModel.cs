@@ -17,6 +17,7 @@ namespace FitTrack.ViewModel
     {
         public RelayCommand<Window> SignOutCommand => new RelayCommand<Window>(window => SignOut(window));
         public RelayCommand<Window> UserInfoCommand => new RelayCommand<Window>(window => UserInfo(window));
+        public RelayCommand<Window> DetailsCommand => new RelayCommand<Window>(window => Details(window));
         public RelayCommand<object> RemoveCommand => new RelayCommand<object>(paramter => Remove());
         public RelayCommand<object> InfoCommand => new RelayCommand<object>(paramter => Info());
         public RelayCommand<object> AddWorkoutCommand => new RelayCommand<object>(paramter => AddWorkout());
@@ -51,9 +52,7 @@ namespace FitTrack.ViewModel
         private void SignOut(Window window)
         {
             new MainWindow().Show();
-            window?.Close();
-            // Dispose of the listener when the window is closed
-            WorkoutManager.workouts.CollectionChanged -= OnWorkoutsCollectionChanged;
+            CloseWindow(window);
         }
 
         private void Remove()
@@ -70,12 +69,32 @@ namespace FitTrack.ViewModel
         private void UserInfo(Window window)
         {
             new UserDetailsWindow(User).Show();
-            window?.Close();
+            CloseWindow(window);
         }
 
         private void AddWorkout()
         {
             new AddWorkoutWindow(User, null).Show();
+        }
+
+        private void Details(Window window)
+        {
+            if (selectedWorkout == null)
+            {
+                Helpers.Error("Please select a workout to view the details on");
+                return;
+            }
+
+            new WorkoutDetailsWindow(User, selectedWorkout).Show();
+            CloseWindow(window);
+        }
+
+        // Becase of the listener use this function to close instead of having to repeat the code
+        private void CloseWindow(Window? window)
+        {
+            window?.Close();
+            // Dispose of the listener when the window is closed
+            WorkoutManager.workouts.CollectionChanged -= OnWorkoutsCollectionChanged;
         }
 
         private void Info()

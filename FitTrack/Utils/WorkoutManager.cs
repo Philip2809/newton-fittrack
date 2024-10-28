@@ -24,6 +24,18 @@ namespace FitTrack.Utils
             workouts.Remove(workout);
         }
 
+        public static void UpdateWorkout(Workout workout)
+        {
+            var existingWorkout = workouts.Where(w => w.Id == workout.Id).ToList().First();
+            if (existingWorkout == null) return;
+
+            existingWorkout.Type = workout.Type;
+            existingWorkout.Duration = workout.Duration;
+            existingWorkout.Date = workout.Date;
+            existingWorkout.CaloriesBurned = workout.CaloriesBurned;
+            existingWorkout.Notes = workout.Notes;
+        }
+
         public static ObservableCollection<Workout> GetWorkoutsByUser(User user)
         {
             if (user.IsAdmin) return workouts;

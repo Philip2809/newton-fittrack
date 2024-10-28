@@ -27,7 +27,7 @@
                 </Style>
             </Button.Resources>
         </Button>
-        <Button Command="{Binding SignInCommand}" Content="Details" HorizontalAlignment="Left" Margin="554,144,0,0" VerticalAlignment="Top" FontFamily="Arial" FontSize="30" Width="200" Background="Crimson" Foreground="LightGray" BorderBrush="LightGray">
+        <Button Command="{Binding DetailsCommand}" CommandParameter="{Binding ElementName=FitTrackWorkoutsWindow}" Content="Details" HorizontalAlignment="Left" Margin="554,144,0,0" VerticalAlignment="Top" FontFamily="Arial" FontSize="30" Width="200" Background="Crimson" Foreground="LightGray" BorderBrush="LightGray">
             <Button.Resources>
                 <Style TargetType="{x:Type Border}">
                     <Setter Property="CornerRadius" Value="7"/>

@@ -37,6 +37,7 @@ namespace FitTrack.Utils
 
             // If all good then update the existing user
             var existingUser = users.Find(u => u.Username == user.Username);
+            if (existingUser == null) return null;
             existingUser.Username = newUsername;
             existingUser.Country = newCountry;
             existingUser.Password = newPassword;
