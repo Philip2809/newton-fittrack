@@ -89,6 +89,12 @@ namespace FitTrack.ViewModel
 
         private void Save(Window window)
         {
+            if (typeInput == "" || caloriesInput == "" || notesInput == "" || durationInput == "" || caloriesInput == "")
+            {
+                Helpers.Error("All inputfields needs to be filled in to be able to save");
+                return;
+            }
+
             TimeSpan duration;
             if (!TimeSpan.TryParse(durationInput, out duration))
             {
@@ -100,12 +106,6 @@ namespace FitTrack.ViewModel
             if (!int.TryParse(caloriesInput, out calories))
             {
                 Helpers.Error("Calories burned needs to be a number.");
-                return;
-            }
-
-            if (typeInput == "" || caloriesInput == "" || notesInput == "")
-            {
-                Helpers.Error("All inputfields needs to be filled in to be able to save");
                 return;
             }
 

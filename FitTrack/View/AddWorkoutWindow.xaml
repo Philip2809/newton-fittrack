@@ -13,7 +13,7 @@
         <Label Content="Date" HorizontalAlignment="Center" VerticalAlignment="Top" FontWeight="Bold" Margin="0,55,0,0" Foreground="LightGray" FontFamily="Arial"/>
         <DatePicker SelectedDate="{Binding DateInput, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Center" Margin="0,74,0,0" VerticalAlignment="Top" Width="200"/>
 
-        <Label Content="Duration (min)" HorizontalAlignment="Center" VerticalAlignment="Top" FontWeight="Bold" Margin="0,107,0,0" Foreground="LightGray" FontFamily="Arial"/>
+        <Label Content="Duration (hh:mm:ss)" HorizontalAlignment="Center" VerticalAlignment="Top" FontWeight="Bold" Margin="0,107,0,0" Foreground="LightGray" FontFamily="Arial"/>
         <TextBox Text="{Binding DurationInput, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Center" Margin="0,125,0,0" VerticalAlignment="Top" Width="200" Background="{x:Null}" FontFamily="Arial" FontSize="25" BorderBrush="LightGray"/>
 
         <Label Content="Calories burned" HorizontalAlignment="Center" VerticalAlignment="Top" FontWeight="Bold" Margin="0,155,0,0" Foreground="LightGray" FontFamily="Arial"/>

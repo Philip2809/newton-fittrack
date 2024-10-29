@@ -25,7 +25,6 @@ namespace FitTrack
                 Username = "user",
                 Country = "Sweden",
                 Password = "password",
-                TwoFA = true,
                 SecurityQuestion = "Vad är en banan?",
                 SecurityAnswer = "ett bär"
             };
@@ -46,12 +45,51 @@ namespace FitTrack
             UserManager.AddUser(admin);
 
             // Default workouts
+            // // Running
+            WorkoutManager.AddWorkout(user, new()
+            {
+                Date = DateTime.Now.AddDays(-3),
+                Type = "Cardio day 1",
+                Duration = TimeSpan.Parse("00:50:00"),
+                CaloriesBurned = 800,
+                Notes = "Ran 10 km 1/10"
+            });
+
+            WorkoutManager.AddWorkout(user, new()
+            {
+                Date = DateTime.Now.AddDays(-2),
+                Type = "Cardio day 2",
+                Duration = TimeSpan.Parse("00:48:00"),
+                CaloriesBurned = 800,
+                Notes = "Ran 10 km 2/10"
+            });
+
             WorkoutManager.AddWorkout(user, new()
             {
                 Date = DateTime.Now.AddDays(-1),
-                Type = "Cardio",
-                Duration = TimeSpan.FromHours(1),
+                Type = "Cardio day 3",
+                Duration = TimeSpan.Parse("00:51:00"),
+                CaloriesBurned = 800,
+                Notes = "Ran 10 km 3/10"
+            });
+
+            // // Lifting
+            WorkoutManager.AddWorkout(user, new()
+            {
+                Date = DateTime.Now.AddDays(-3).AddHours(-5),
+                Type = "Strength day 1",
+                Duration = TimeSpan.Parse("00:33:00"),
                 CaloriesBurned = 600,
+                Notes = "Leg day (1/5)"
+            });
+
+            WorkoutManager.AddWorkout(user, new()
+            {
+                Date = DateTime.Now.AddDays(-1).AddHours(-5),
+                Type = "Strength day 2",
+                Duration = TimeSpan.Parse("00:28:00"),
+                CaloriesBurned = 600,
+                Notes = "Arms (2/5)"
             });
         }
     }

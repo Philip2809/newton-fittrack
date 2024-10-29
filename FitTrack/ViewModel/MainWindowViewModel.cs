@@ -31,7 +31,6 @@ namespace FitTrack.ViewModel
 
         public void SignIn(object[] parameters)
         {
-            MessageBox.Show(parameters?.GetType().Name);
             var pbxPassword = parameters[0] as PasswordBox;
             var mainWindow = parameters[1] as Window;
             // temporarly show a window with inputed username and password
