@@ -17,6 +17,7 @@ namespace FitTrack.ViewModel
 {
     class WorkoutDetailsWindowViewModel : ViewModelBase
     {
+        public List<string> WorkoutTypes { get { return Enum.GetNames(typeof(WorkoutType)).ToList(); } }
         public RelayCommand<Window> CloseSaveCommand => new RelayCommand<Window>(window => CloseSave(window));
         public RelayCommand<object> EditCancelCommand => new RelayCommand<object>(parameter => EditCancel());
         public RelayCommand<object> CopyCommand => new RelayCommand<object>(parameter => Copy(), canExecute => isViewOnly);
@@ -39,6 +40,10 @@ namespace FitTrack.ViewModel
             DurationInput = Workout.Duration.ToString();
             CaloriesInput = Workout.CaloriesBurned.ToString();
             NotesInput = Workout.Notes;
+
+            // Additional input based on workout type, making if else statements to make it easy to add more
+            if (Workout is StrengthWorkout) AdditionalInput = ((StrengthWorkout)Workout).Repetitions.ToString();
+            else if (Workout is CardioWorkout) AdditionalInput = ((CardioWorkout)Workout).Distance.ToString();
         }
 
         private bool isViewOnly = true;
@@ -96,6 +101,17 @@ namespace FitTrack.ViewModel
             }
         }
 
+        private string additionalInput = "";
+        public string AdditionalInput
+        {
+            get { return additionalInput; }
+            set
+            {
+                additionalInput = value;
+                OnPropertyChanged();
+            }
+        }
+
         private string notesInput = "";
         public string NotesInput
         {
@@ -127,20 +143,49 @@ namespace FitTrack.ViewModel
                     return;
                 }
 
-                if (typeInput == "" || caloriesInput == "" || notesInput == "")
+                if (typeInput == "" || caloriesInput == "" || notesInput == "" || additionalInput == "")
                 {
                     Helpers.Error("All inputfields needs to be filled in to be able to save");
                     return;
                 }
 
-                WorkoutManager.UpdateWorkout(new() {
-                    Type = typeInput,
-                    Date = dateInput,
-                    Duration = duration,
-                    CaloriesBurned = calories,
-                    Notes = notesInput,
-                });
+                WorkoutType type;
+                if (Enum.TryParse(typeInput, out type) && type == WorkoutType.Cardio)
+                {
+                    int distance;
+                    if (!int.TryParse(additionalInput, out distance))
+                    {
+                        Helpers.Error("Distance needs to be a number.");
+                        return;
+                    }
 
+                    WorkoutManager.UpdateWorkout(User, Workout, new CardioWorkout()
+                    {
+                        Date = dateInput,
+                        Duration = duration,
+                        Distance = distance,
+                        CaloriesBurned = calories,
+                        Notes = notesInput,
+                    });
+                }
+                else if (type == WorkoutType.Strength)
+                {
+                    int repetitions;
+                    if (!int.TryParse(additionalInput, out repetitions))
+                    {
+                        Helpers.Error("Repetitions needs to be a number.");
+                        return;
+                    }
+
+                    WorkoutManager.UpdateWorkout(User, Workout, new StrengthWorkout()
+                    {
+                        Date = dateInput,
+                        Duration = duration,
+                        Repetitions = repetitions,
+                        CaloriesBurned = calories,
+                        Notes = notesInput,
+                    });
+                }
             }
 
             new WorkoutsWindow(User).Show();

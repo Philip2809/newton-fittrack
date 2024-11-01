@@ -12,7 +12,7 @@
     </Window.Resources>
     <Grid Background="Crimson">
         <Label Content="Type" HorizontalAlignment="Center" VerticalAlignment="Top" FontWeight="Bold" Margin="0,3,0,0" Foreground="LightGray" FontFamily="Arial"/>
-        <TextBox Text="{Binding TypeInput, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="{Binding IsViewOnly}" HorizontalAlignment="Center" Margin="0,22,0,0" VerticalAlignment="Top" Width="200" Background="{x:Null}" FontFamily="Arial" FontSize="25" BorderBrush="LightGray"/>
+        <ComboBox ItemsSource="{Binding WorkoutTypes}" SelectedItem="{Binding TypeInput, UpdateSourceTrigger=PropertyChanged}" IsEnabled="{Binding IsViewOnly, Converter={StaticResource InverseBooleanConverter}}" HorizontalAlignment="Center" Margin="0,22,0,0" VerticalAlignment="Top" Width="200" FontFamily="Arial" FontSize="25" Background="{x:Null}"/>
 
         <Label Content="Date" HorizontalAlignment="Center" VerticalAlignment="Top" FontWeight="Bold" Margin="0,55,0,0" Foreground="LightGray" FontFamily="Arial"/>
         <DatePicker SelectedDate="{Binding DateInput, UpdateSourceTrigger=PropertyChanged}" IsEnabled="{Binding IsViewOnly, Converter={StaticResource InverseBooleanConverter}}" HorizontalAlignment="Center" Margin="0,74,0,0" VerticalAlignment="Top" Width="200"/>
@@ -23,10 +23,27 @@
         <Label Content="Calories burned" HorizontalAlignment="Center" VerticalAlignment="Top" FontWeight="Bold" Margin="0,155,0,0" Foreground="LightGray" FontFamily="Arial"/>
         <TextBox Text="{Binding CaloriesInput, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="{Binding IsViewOnly}" HorizontalAlignment="Center" Margin="0,175,0,0" VerticalAlignment="Top" Width="200" Background="{x:Null}" FontFamily="Arial" FontSize="25" BorderBrush="LightGray"/>
 
-        <Label Content="Notes" HorizontalAlignment="Center" VerticalAlignment="Top" FontWeight="Bold" Margin="0,207,0,0" Foreground="LightGray" FontFamily="Arial"/>
-        <TextBox Text="{Binding NotesInput, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="{Binding IsViewOnly}" HorizontalAlignment="Center" Margin="0,225,0,0" VerticalAlignment="Top" Width="200" Background="{x:Null}" FontFamily="Arial" FontSize="25" BorderBrush="LightGray"/>
+        <Label HorizontalAlignment="Center" VerticalAlignment="Top" FontWeight="Bold" Foreground="LightGray" FontFamily="Arial" Margin="0,207,0,0">
+            <Label.Style>
+                <Style TargetType="{x:Type Label}">
+                    <Setter Property="Content" Value="Select Type" />
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding TypeInput}" Value="Cardio">
+                            <Setter Property="Content" Value="Distance" />
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding TypeInput}" Value="Strength">
+                            <Setter Property="Content" Value="Repetitions" />
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Label.Style>
+        </Label>
+        <TextBox Text="{Binding AdditionalInput, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="{Binding IsViewOnly}" HorizontalAlignment="Center" Margin="0,225,0,0" VerticalAlignment="Top" Width="200" Background="{x:Null}" FontFamily="Arial" FontSize="25" BorderBrush="LightGray"/>
 
-        <Button Command="{Binding EditCancelCommand}" HorizontalAlignment="Left" Margin="300,275,0,0" VerticalAlignment="Top" FontFamily="Arial" FontSize="30" Width="95" Background="Crimson" Foreground="LightGray" BorderBrush="LightGray">
+        <Label Content="Notes" HorizontalAlignment="Center" VerticalAlignment="Top" FontWeight="Bold" Margin="0,251,0,0" Foreground="LightGray" FontFamily="Arial"/>
+        <TextBox Text="{Binding NotesInput, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="{Binding IsViewOnly}" HorizontalAlignment="Center" Margin="0,269,0,0" VerticalAlignment="Top" Width="200" Background="{x:Null}" FontFamily="Arial" FontSize="25" BorderBrush="LightGray"/>
+
+        <Button Command="{Binding EditCancelCommand}" HorizontalAlignment="Left" Margin="300,319,0,0" VerticalAlignment="Top" FontFamily="Arial" FontSize="30" Width="95" Background="Crimson" Foreground="LightGray" BorderBrush="LightGray">
             <Button.Resources>
                 <Style TargetType="{x:Type Border}">
                     <Setter Property="CornerRadius" Value="7"/>
@@ -47,7 +64,7 @@
             </Button.Style>
         </Button>
 
-        <Button Command="{Binding CloseSaveCommand}" CommandParameter="{Binding ElementName=FitTrackWorkoutDetailsWindow}" HorizontalAlignment="Left" Margin="400,275,0,0" VerticalAlignment="Top" FontFamily="Arial" FontSize="30" Width="101" Background="Crimson" Foreground="LightGray" BorderBrush="LightGray">
+        <Button Command="{Binding CloseSaveCommand}" CommandParameter="{Binding ElementName=FitTrackWorkoutDetailsWindow}" HorizontalAlignment="Left" Margin="400,319,0,0" VerticalAlignment="Top" FontFamily="Arial" FontSize="30" Width="101" Background="Crimson" Foreground="LightGray" BorderBrush="LightGray">
             <Button.Resources>
                 <Style TargetType="{x:Type Border}">
                     <Setter Property="CornerRadius" Value="7"/>
@@ -68,13 +85,12 @@
             </Button.Style>
         </Button>
 
-        <Button Command="{Binding CopyCommand}" Content="Copy to new" HorizontalAlignment="Center" Margin="0,328,0,0" VerticalAlignment="Top" FontFamily="Arial" FontSize="30" Width="200" Background="Crimson" Foreground="LightGray" BorderBrush="LightGray">
+        <Button Command="{Binding CopyCommand}" Content="Copy to new" HorizontalAlignment="Center" Margin="0,372,0,0" VerticalAlignment="Top" FontFamily="Arial" FontSize="30" Width="200" Background="Crimson" Foreground="LightGray" BorderBrush="LightGray">
             <Button.Resources>
                 <Style TargetType="{x:Type Border}">
                     <Setter Property="CornerRadius" Value="7"/>
                 </Style>
             </Button.Resources>
         </Button>
-
     </Grid>
 </Window>

@@ -14,10 +14,11 @@ namespace FitTrack.Utils
 
         public static bool AddUser(User user)
         {
+            // Check if username already exists
             var existingUser = users.Find(u => u.Username == user.Username);
             if (existingUser == null)
             {
-                user.Id = users.Count;
+                user.Id = Guid.NewGuid();
                 users.Add(user);
                 return true;
             }

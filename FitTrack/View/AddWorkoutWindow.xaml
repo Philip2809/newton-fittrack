@@ -5,10 +5,10 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
-        Title="AddWorkoutWindow" Height="367" Width="309">
+        Title="AddWorkoutWindow" Height="410" Width="309">
     <Grid Background="Crimson">
         <Label Content="Type" HorizontalAlignment="Center" VerticalAlignment="Top" FontWeight="Bold" Margin="0,3,0,0" Foreground="LightGray" FontFamily="Arial"/>
-        <TextBox Text="{Binding TypeInput, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Center" Margin="0,22,0,0" VerticalAlignment="Top" Width="200" Background="{x:Null}" FontFamily="Arial" FontSize="25" BorderBrush="LightGray"/>
+        <ComboBox ItemsSource="{Binding WorkoutTypes}" SelectedItem="{Binding TypeInput, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Center" Margin="0,22,0,0" VerticalAlignment="Top" Width="200" FontFamily="Arial" FontSize="25" Background="{x:Null}"/>
 
         <Label Content="Date" HorizontalAlignment="Center" VerticalAlignment="Top" FontWeight="Bold" Margin="0,55,0,0" Foreground="LightGray" FontFamily="Arial"/>
         <DatePicker SelectedDate="{Binding DateInput, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Center" Margin="0,74,0,0" VerticalAlignment="Top" Width="200"/>
@@ -19,10 +19,38 @@
         <Label Content="Calories burned" HorizontalAlignment="Center" VerticalAlignment="Top" FontWeight="Bold" Margin="0,155,0,0" Foreground="LightGray" FontFamily="Arial"/>
         <TextBox Text="{Binding CaloriesInput, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Center" Margin="0,175,0,0" VerticalAlignment="Top" Width="200" Background="{x:Null}" FontFamily="Arial" FontSize="25" BorderBrush="LightGray"/>
 
-        <Label Content="Notes" HorizontalAlignment="Center" VerticalAlignment="Top" FontWeight="Bold" Margin="0,207,0,0" Foreground="LightGray" FontFamily="Arial"/>
-        <TextBox Text="{Binding NotesInput, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Center" Margin="0,225,0,0" VerticalAlignment="Top" Width="200" Background="{x:Null}" FontFamily="Arial" FontSize="25" BorderBrush="LightGray"/>
+        <Label HorizontalAlignment="Center" VerticalAlignment="Top" FontWeight="Bold" Margin="0,205,0,0" Foreground="LightGray" FontFamily="Arial">
+            <Label.Style>
+                <Style TargetType="Label">
+                    <Setter Property="Content" Value="Select Type" />
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding TypeInput}" Value="Cardio">
+                            <Setter Property="Content" Value="Distance" />
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding TypeInput}" Value="Strength">
+                            <Setter Property="Content" Value="Repetitions" />
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Label.Style>
+        </Label>
+        <TextBox Text="{Binding AdditionalInput, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Center" Margin="0,225,0,0" VerticalAlignment="Top" Width="200" Background="{x:Null}" FontFamily="Arial" FontSize="25" BorderBrush="LightGray">
+        <TextBox.Style>
+            <Style TargetType="TextBox">
+                <Setter Property="IsReadOnly" Value="False" />
+                <Style.Triggers>
+                    <DataTrigger Binding="{Binding TypeInput}" Value="">
+                        <Setter Property="IsReadOnly" Value="True" />
+                    </DataTrigger>
+                </Style.Triggers>
+            </Style>
+        </TextBox.Style>
+        </TextBox>
 
-        <Button Command="{Binding SaveCommand}" CommandParameter="{Binding ElementName=FitTrackAddWorkoutWindow}" Content="Add workout" HorizontalAlignment="Center" Margin="0,275,0,0" VerticalAlignment="Top" FontFamily="Arial" FontSize="30" Width="200" Background="Crimson" Foreground="LightGray" BorderBrush="LightGray">
+        <Label Content="Notes" HorizontalAlignment="Center" VerticalAlignment="Top" FontWeight="Bold" Margin="0,257,0,0" Foreground="LightGray" FontFamily="Arial"/>
+        <TextBox Text="{Binding NotesInput, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Center" Margin="0,275,0,0" VerticalAlignment="Top" Width="200" Background="{x:Null}" FontFamily="Arial" FontSize="25" BorderBrush="LightGray"/>
+
+        <Button Command="{Binding SaveCommand}" CommandParameter="{Binding ElementName=FitTrackAddWorkoutWindow}" Content="Add workout" HorizontalAlignment="Center" Margin="0,325,0,0" VerticalAlignment="Top" FontFamily="Arial" FontSize="30" Width="200" Background="Crimson" Foreground="LightGray" BorderBrush="LightGray">
             <Button.Resources>
                 <Style TargetType="{x:Type Border}">
                     <Setter Property="CornerRadius" Value="7"/>

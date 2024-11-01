@@ -6,14 +6,19 @@ using System.Threading.Tasks;
 
 namespace FitTrack.Model
 {
-    public class Workout
+    public enum WorkoutType
+    {
+        Strength,
+        Cardio
+    };
+    public abstract class Workout
     {
         // UserId to allow workout manager to filter by user
-        public int UserId { get; set; }
+        public Guid UserId { get; set; }
         // To easily allow delete and updates
-        public int Id { get; set; }
+        public Guid Id { get; set; }
         public DateTime Date { get; set; }
-        public string Type { get; set; }
+        public abstract string Type { get; }
         public TimeSpan Duration { get; set; }
         public int CaloriesBurned { get; set; }
         public string Notes { get; set; }
