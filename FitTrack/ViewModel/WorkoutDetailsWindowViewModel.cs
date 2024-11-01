@@ -159,7 +159,7 @@ namespace FitTrack.ViewModel
                         return;
                     }
 
-                    WorkoutManager.UpdateWorkout(User, Workout, new CardioWorkout()
+                    WorkoutManager.UpdateWorkout(Workout, new CardioWorkout()
                     {
                         Date = dateInput,
                         Duration = duration,
@@ -177,7 +177,7 @@ namespace FitTrack.ViewModel
                         return;
                     }
 
-                    WorkoutManager.UpdateWorkout(User, Workout, new StrengthWorkout()
+                    WorkoutManager.UpdateWorkout(Workout, new StrengthWorkout()
                     {
                         Date = dateInput,
                         Duration = duration,
